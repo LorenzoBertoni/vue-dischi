@@ -1,8 +1,8 @@
 <template>
     <header>
-        <div class="logo">
+        <a href="#" class="logo">
             <img src="https://grafica-facile.com/wp-content/uploads/2022/01/spotify-logo.png" alt="Spotify Logo">
-        </div>
+        </a>
     </header>
 </template>
 

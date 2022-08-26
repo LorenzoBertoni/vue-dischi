@@ -40,7 +40,12 @@ export default {
             width: 70%;
             height: 130px;
             margin: 1.5rem auto;
+            cursor: pointer;
+            transition: transform linear .2s;
 
+            &:hover {
+                transform: scale(1.1);
+            }
             img {
                 width: 100%;
                 height: 100%;
@@ -55,9 +60,14 @@ export default {
             text-align: center;
             font-size: 1rem;
             padding: 1rem;
+            cursor: pointer;
 
             h3 {
                 word-wrap: break-word;
+
+                &:hover {
+                    text-decoration: underline;
+                }
             }
         }
 
