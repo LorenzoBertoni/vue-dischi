@@ -21,6 +21,19 @@
         @click="reset"
         >
         Reset</button>
+
+        <select name="select-author" id="select-author"
+        v-model="authorsOptionValue"
+        @change="$emit('authorsOptionValue', authorsOptionValue)"
+        >
+            <option v-for="(author, index) in getFilteredAuthorList()" 
+            :key="index" 
+            :value="author"
+            >
+            {{author}}</option>
+        </select>
+
+        <button id="reset-authors" @click="resetAuthor">Reset</button>
     </header>
 </template>
 
@@ -28,11 +41,13 @@
 export default {
     name: 'AppHeader',
     props: {
-        genres: Array
+        genres: Array,
+        authors: Array
     },
     data() {
         return {
-            optionValue: null
+            optionValue: null,
+            authorsOptionValue: null
         }
     },
     methods: {
@@ -43,13 +58,28 @@ export default {
                 if(!filteredGenre.includes(genre)) {
                     filteredGenre.push(genre);
                 }
-            })
+            });
 
             return filteredGenre;
+        },
+        getFilteredAuthorList() {
+            let filteredAuthor = [];
+
+            this.authors.forEach(author => {
+                if(!filteredAuthor.includes(author)) {
+                    filteredAuthor.push(author);
+                }
+            });
+
+            return filteredAuthor;
         },
         reset() {
             this.optionValue = null;
             this.$emit('resetValue', this.optionValue);
+        },
+        resetAuthor() {
+            this.authorsOptionValue = null;
+            this.$emit('resetAuthorValue', this.authorsOptionValue);
         }
     }
 }
@@ -62,6 +92,9 @@ export default {
         width: 100%;
         padding: 1rem;
         background-color: $header_color;
+        position: sticky;
+        top: 0;
+        left: 0;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -77,12 +110,13 @@ export default {
             }
         }
 
-        #select-genre, #reset {
+        #select-genre, #reset, #select-author, #reset-authors {
             padding: .5rem 1rem;
             border: none;
             border-radius: .5rem;
             margin: 1rem;
             font-size: 1.1rem;
+            cursor: pointer;
         }
     }
 </style>

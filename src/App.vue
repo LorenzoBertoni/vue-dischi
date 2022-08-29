@@ -4,13 +4,16 @@
     :genres="mainGenreList"
     @selectedValue="getValue"
     @resetValue="resetValue"
-    />
+    :authors="mainAuthorsList"
+    @authorsOptionValue="getAuthorsOptionValue"
+    @resetAuthorValue="resetAuthorValue"/>
     
     <AppMain 
-    @genreList="getDiscsGenresFromMain"
+    @genreList="getGenresFromMain"
     @selectedValue="getValue"
     :value="optionValue"
-    />
+    @authorsList="getAuthorsFromMain"
+    :authorsValue="authorsOptionValue"/>
   </div>
 </template>
 
@@ -28,11 +31,13 @@ export default {
   data() {
     return {
       mainGenreList: [],
-      optionValue: null
+      optionValue: null,
+      mainAuthorsList: [],
+      authorsOptionValue: null
     }
   },
   methods: {
-    getDiscsGenresFromMain(mainGenre) {
+    getGenresFromMain(mainGenre) {
       this.mainGenreList = mainGenre;
     },
     getValue(value) {
@@ -40,6 +45,15 @@ export default {
     },
     resetValue(value) {
       this.optionValue = value;
+    },
+    getAuthorsFromMain(mainAuthors) {
+      this.mainAuthorsList = mainAuthors;
+    },
+    getAuthorsOptionValue(authorsOptionValue) {
+      this.authorsOptionValue = authorsOptionValue;
+    },
+    resetAuthorValue(authorValue) {
+      this.authorsOptionValue = authorValue;
     }
   }
 }

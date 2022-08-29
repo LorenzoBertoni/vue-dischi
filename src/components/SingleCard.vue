@@ -28,6 +28,7 @@ export default {
     },
     mounted() {
         this.$emit('discsGenres', this.disc.genre);
+        this.$emit('discAuthors', this.disc.author);
     }
 }
 </script>

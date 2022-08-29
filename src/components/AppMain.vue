@@ -6,6 +6,7 @@
             :key="index"
             :disc="disc"
             @discsGenres="getDiscsGenres"
+            @discAuthors="getDiscsAuthors"
             />
         </div>
     </main>
@@ -23,7 +24,8 @@ export default {
         LoadInProgress
     },
     props: {
-        value: String
+        value: String,
+        authorsValue: String
     },
     created() {
         this.getDiscs();
@@ -33,7 +35,8 @@ export default {
             discs: [],
             IsLoading: true,
             genreList: [],
-            optionValue: null
+            optionValue: null,
+            authorsList: []
         }
     },
     methods: {
@@ -52,23 +55,27 @@ export default {
             this.genreList.push(genre);
         },
         filteredList() {
-            if(this.value == null) {
+            if(this.value == null && this.authorsValue == null) {
                 return this.discs.response;
             } else {
                 const filteredDiscs = this.discs.response.filter(disc => {
-                    if(disc.genre == this.value) {
+                    if(disc.genre == this.value || disc.author == this.authorsValue) {
                         return true;
-                    } else {
+                    }else {
                         return false;
                     }
                 })
 
                 return filteredDiscs;
             }
+        },
+        getDiscsAuthors(author) {
+            this.authorsList.push(author);
         }
     },
     mounted() {
         this.$emit('genreList', this.genreList);
+        this.$emit('authorsList', this.authorsList);
     }
 }
 </script>
@@ -78,9 +85,8 @@ export default {
 
     main {
         width: 100%;
-        height: 100vh;
-        background-color: $main_color;
-        padding-top: 2.5rem;
+        height: 100%;
+        padding: 2.5rem;
 
         .cards {
             width: 60%;
