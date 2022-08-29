@@ -25,6 +25,9 @@ export default {
     name: 'SingleCard',
     props: {
         disc: Object
+    },
+    mounted() {
+        this.$emit('discsGenres', this.disc.genre);
     }
 }
 </script>

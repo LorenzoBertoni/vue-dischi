@@ -1,7 +1,16 @@
 <template>
   <div id="app">
-    <AppHeader />
-    <AppMain />
+    <AppHeader 
+    :genres="mainGenreList"
+    @selectedValue="getValue"
+    @resetValue="resetValue"
+    />
+    
+    <AppMain 
+    @genreList="getDiscsGenresFromMain"
+    @selectedValue="getValue"
+    :value="optionValue"
+    />
   </div>
 </template>
 
@@ -15,6 +24,23 @@ export default {
   components: {
     AppHeader,
     AppMain
+  },
+  data() {
+    return {
+      mainGenreList: [],
+      optionValue: null
+    }
+  },
+  methods: {
+    getDiscsGenresFromMain(mainGenre) {
+      this.mainGenreList = mainGenre;
+    },
+    getValue(value) {
+      this.optionValue = value;
+    },
+    resetValue(value) {
+      this.optionValue = value;
+    }
   }
 }
 </script>

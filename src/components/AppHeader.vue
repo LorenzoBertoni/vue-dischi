@@ -3,12 +3,55 @@
         <a href="#" class="logo">
             <img src="https://grafica-facile.com/wp-content/uploads/2022/01/spotify-logo.png" alt="Spotify Logo">
         </a>
+
+        <select 
+        name="select-genre" id="select-genre" 
+        v-model="optionValue" 
+        @change="$emit('selectedValue', optionValue)"
+        >
+            <option v-for="(genre, index) in getFilteredList()"
+            :key="index"
+            :value="genre"
+            >
+            {{genre}}</option>
+        </select>   
+
+        <button 
+        id="reset" 
+        @click="reset"
+        >
+        Reset</button>
     </header>
 </template>
 
 <script>
 export default {
-    name: 'AppHeader'
+    name: 'AppHeader',
+    props: {
+        genres: Array
+    },
+    data() {
+        return {
+            optionValue: null
+        }
+    },
+    methods: {
+        getFilteredList() {
+            let filteredGenre = [];
+
+            this.genres.forEach(genre => {
+                if(!filteredGenre.includes(genre)) {
+                    filteredGenre.push(genre);
+                }
+            })
+
+            return filteredGenre;
+        },
+        reset() {
+            this.optionValue = null;
+            this.$emit('resetValue', this.optionValue);
+        }
+    }
 }
 </script>
 
@@ -32,6 +75,14 @@ export default {
                 width: 100%;
                 height: 100%;
             }
+        }
+
+        #select-genre, #reset {
+            padding: .5rem 1rem;
+            border: none;
+            border-radius: .5rem;
+            margin: 1rem;
+            font-size: 1.1rem;
         }
     }
 </style>

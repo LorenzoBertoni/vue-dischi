@@ -2,7 +2,11 @@
     <main>
         <div class="cards">
             <LoadInProgress v-if="IsLoading"/>
-            <SingleCard v-for="(disc, index) in discs.response" :key="index" :disc="disc"/>
+            <SingleCard v-for="(disc, index) in filteredList()"
+            :key="index"
+            :disc="disc"
+            @discsGenres="getDiscsGenres"
+            />
         </div>
     </main>
 </template>
@@ -18,13 +22,18 @@ export default {
         SingleCard,
         LoadInProgress
     },
+    props: {
+        value: String
+    },
     created() {
         this.getDiscs();
     },
     data() {
         return {
             discs: [],
-            IsLoading: true
+            IsLoading: true,
+            genreList: [],
+            optionValue: null
         }
     },
     methods: {
@@ -38,7 +47,28 @@ export default {
                 console.log(error);
                 this.IsLoading = false;
             })
+        },
+        getDiscsGenres(genre) {
+            this.genreList.push(genre);
+        },
+        filteredList() {
+            if(this.value == null) {
+                return this.discs.response;
+            } else {
+                const filteredDiscs = this.discs.response.filter(disc => {
+                    if(disc.genre == this.value) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                })
+
+                return filteredDiscs;
+            }
         }
+    },
+    mounted() {
+        this.$emit('genreList', this.genreList);
     }
 }
 </script>
@@ -48,8 +78,9 @@ export default {
 
     main {
         width: 100%;
+        height: 100vh;
         background-color: $main_color;
-        padding: 2.5rem 0 1.6rem 0;
+        padding-top: 2.5rem;
 
         .cards {
             width: 60%;
