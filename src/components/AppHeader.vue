@@ -33,7 +33,9 @@
             {{author}}</option>
         </select>
 
-        <button id="reset-authors" @click="resetAuthor">Reset</button>
+        <button id="reset-authors" @click="resetAuthor">
+            Reset
+        </button>
     </header>
 </template>
 

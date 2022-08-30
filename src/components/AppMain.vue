@@ -2,6 +2,7 @@
     <main>
         <div class="cards">
             <LoadInProgress v-if="IsLoading"/>
+            
             <SingleCard v-for="(disc, index) in filteredList()"
             :key="index"
             :disc="disc"
@@ -54,7 +55,9 @@ export default {
         getDiscsGenres(genre) {
             this.genreList.push(genre);
         },
-        filteredList() {
+        filteredList() { //* funzione principale, 
+                        //*responsabile della visualizazione
+                        //*dinamica degli album in base ai criteri di ricerca 
             if(this.value == null && this.authorsValue == null) {
                 return this.discs.response;
             } else {

@@ -6,14 +6,16 @@
     @resetValue="resetValue"
     :authors="mainAuthorsList"
     @authorsOptionValue="getAuthorsOptionValue"
-    @resetAuthorValue="resetAuthorValue"/>
+    @resetAuthorValue="resetAuthorValue"
+    />
     
     <AppMain 
     @genreList="getGenresFromMain"
     @selectedValue="getValue"
     :value="optionValue"
     @authorsList="getAuthorsFromMain"
-    :authorsValue="authorsOptionValue"/>
+    :authorsValue="authorsOptionValue"
+    />
   </div>
 </template>
 
@@ -33,7 +35,7 @@ export default {
       mainGenreList: [],
       optionValue: null,
       mainAuthorsList: [],
-      authorsOptionValue: null
+      authorsOptionValue: null,
     }
   },
   methods: {

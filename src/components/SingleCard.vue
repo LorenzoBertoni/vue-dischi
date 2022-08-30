@@ -1,23 +1,23 @@
 <template>
     <div class="card">
-                <div class="card-img">
-                    <img :src="disc.poster" :alt="disc.title">
-                </div>
+        <div class="card-img">
+            <img :src="disc.poster" :alt="disc.title">
+        </div>
 
-                <div class="card-title">
-                    <h3>{{disc.title.toUpperCase()}}</h3>
-                </div>
+        <div class="card-title">
+            <h3>{{disc.title.toUpperCase()}}</h3>
+        </div>
 
-                <div class="card-text">
-                    <div class="author">
-                        {{disc.author}}
-                    </div>
-
-                    <div class="release">
-                        {{disc.year}}
-                    </div>
-                </div>
+        <div class="card-text">
+            <div class="author">
+                {{disc.author}}
             </div>
+
+            <div class="release">
+                {{disc.year}}
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -50,6 +50,7 @@ export default {
             &:hover {
                 transform: scale(1.1);
             }
+            
             img {
                 width: 100%;
                 height: 100%;
